@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DeadLockApp.Items"
+             >
+    <ScrollView>
+        <StackLayout Padding="10">
+            <Label Text="Предметы Deadlock" Style="{StaticResource HeaderStyle}" HorizontalOptions="Center" />
+
+            <CollectionView ItemsSource="{Binding Items}" Margin="20">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border BackgroundColor="Black">
+                            <HorizontalStackLayout Style="{StaticResource ListItemStyle}" Padding="5" Spacing="10" Background="#282A36">
+                                <Image Source="{Binding ImageUrl}" Style="{StaticResource Img}" HorizontalOptions="Start" />
+
+                                <VerticalStackLayout HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="200">
+                                    <Label Text="{Binding Name}" Style="{StaticResource NameStyle}"  />
+                                    <Label Text="{Binding Price}" Style="{StaticResource DescriptionStyle}" />
+                                    <Label Text="{Binding Category,StringFormat='Категория: {0}'}" Style="{StaticResource DescriptionStyle}" />
+                                    <Label Text="{Binding Tier, StringFormat='Уровень: {0}'}" Style="{StaticResource DescriptionStyle}" />
+                                    <Button Text="Подробнее" Style="{StaticResource CustomButtonStyle}" Clicked="Button_Clicked" />
+                                </VerticalStackLayout>
+                            </HorizontalStackLayout>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>
