@@ -12,16 +12,5 @@ public partial class Heroes : ContentPage
         BindingContext = new MainViewModel();
     }
 
-    
-    private void OnFavoriteButtonClicked(object sender, EventArgs e)
-    {
-        var button = (Button)sender;
-        var hero = (Hero)button.BindingContext;  // Получаем объект героя из контекста привязки
-
-        // Изменяем состояние избранного
-        hero.IsFavorite = !hero.IsFavorite;
-
-        // Можно добавить отладочный вывод, чтобы убедиться, что значение изменилось
-        Console.WriteLine($"{hero.Name} - Избранное: {hero.IsFavorite}");
-    }
+   
 }

@@ -35,8 +35,7 @@
         <Style x:Key="Img" TargetType="Image">
             <Setter Property="BackgroundColor" Value="#282A36"/>
          
-            <Setter Property="WidthRequest" Value="100"/>
-            <Setter Property="HeightRequest" Value="100"/>
+            <Setter Property="HeightRequest" Value="260"/>
         </Style>
         <Style x:Key="ImgLogo" TargetType="Image">
             <Setter Property="Margin" Value="10"/>
