@@ -11,17 +11,13 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Border BackgroundColor="Black">
-                            <HorizontalStackLayout Style="{StaticResource ListItemStyle}" Padding="5" Spacing="10" Background="#282A36">
-                                <Image Source="{Binding ImageUrl}" Style="{StaticResource Img}" HorizontalOptions="Start" />
-
-                                <VerticalStackLayout HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="200">
-                                    <Label Text="{Binding Name}" Style="{StaticResource NameStyle}"  />
+                            <VerticalStackLayout Style="{StaticResource ListItemStyle}" Padding="5" Spacing="10" Background="#282A36" WidthRequest="80">
+                                <Image Source="{Binding ImageUrl}" Style="{StaticResource Img}" HorizontalOptions="Center" WidthRequest="70" HeightRequest="70"/>
+                                <HorizontalStackLayout HorizontalOptions="Center" >
                                     <Label Text="{Binding Price}" Style="{StaticResource DescriptionStyle}" />
-                                    <Label Text="{Binding Category,StringFormat='Категория: {0}'}" Style="{StaticResource DescriptionStyle}" />
-                                    <Label Text="{Binding Tier, StringFormat='Уровень: {0}'}" Style="{StaticResource DescriptionStyle}" />
-                                    <Button Text="Подробнее" Style="{StaticResource CustomButtonStyle}" Clicked="Button_Clicked" />
-                                </VerticalStackLayout>
-                            </HorizontalStackLayout>
+                                    <Image Source="souls.png"/>
+                                </HorizontalStackLayout>
+                            </VerticalStackLayout>
                         </Border>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

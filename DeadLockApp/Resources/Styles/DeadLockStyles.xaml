@@ -48,8 +48,6 @@
         <Style x:Key="DescriptionStyle" TargetType="Label">
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="LineBreakMode" Value="WordWrap"/>
-            <Setter Property="MaxLines" Value="4"/>
-            <Setter Property="WidthRequest" Value="200"/>
             <Setter Property="TextColor" Value="White"/>
         </Style>
     </ResourceDictionary>
