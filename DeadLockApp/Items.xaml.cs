@@ -8,9 +8,4 @@ public partial class Items : ContentPage
 		InitializeComponent();
         BindingContext = new MainViewModel();
     }
-
-    private async void Button_Clicked(object sender, EventArgs e)
-    {
-        await DisplayAlert("Подробнее", "Супер мега подробное описание", "OK");
-    }
 }

@@ -5,17 +5,17 @@
     <ResourceDictionary>
         <!-- Header Style -->
         <Style x:Key="Content" TargetType="ContentPage">
-            <Setter Property="Background" Value="#021052"></Setter>
+            <Setter Property="Background" Value="#b8ab93"></Setter>
         </Style>
         <Style x:Key="HeaderStyle" TargetType="Label">
             <Setter Property="FontSize" Value="20"/>
             <Setter Property="FontAttributes" Value="Bold"/>
-            <Setter Property="TextColor" Value="#FFFFFF"/>
             <Setter Property="TextTransform" Value="Uppercase"/>
+            <Setter Property="TextColor" Value="#efdfc0"/>
         </Style>
         <Style x:Key="LabelStyle" TargetType="Label">
             <Setter Property="FontSize" Value="20"/>
-            <Setter Property="TextColor" Value="White"/>
+            <Setter Property="TextColor" Value="#efdfc0"/>
         </Style>
 
         <!-- Button Style -->
@@ -29,26 +29,22 @@
 
         <!-- List Item Style -->
         <Style x:Key="ListItemStyle" TargetType="StackLayout">
-            <Setter Property="BackgroundColor" Value="#282A36"/>
-            <Setter Property="Padding" Value="10"/>
+            <Setter Property="BackgroundColor" Value="#efdfc0"/>
         </Style>
         <Style x:Key="Img" TargetType="Image">
-            <Setter Property="BackgroundColor" Value="#282A36"/>
+            <Setter Property="BackgroundColor" Value="#efdfc0"/>
          
             <Setter Property="HeightRequest" Value="260"/>
         </Style>
         <Style x:Key="ImgLogo" TargetType="Image">
-            <Setter Property="Margin" Value="10"/>
         </Style>
         <Style x:Key="NameStyle" TargetType="Label">
             <Setter Property="FontSize" Value="18"/>
             <Setter Property="FontAttributes" Value="Bold"/>
-            <Setter Property="TextColor" Value="White"/>
         </Style>
         <Style x:Key="DescriptionStyle" TargetType="Label">
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="LineBreakMode" Value="WordWrap"/>
-            <Setter Property="TextColor" Value="White"/>
         </Style>
     </ResourceDictionary>
 </ResourceDictionary>

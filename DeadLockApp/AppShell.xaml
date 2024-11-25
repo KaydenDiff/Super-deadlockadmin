@@ -5,6 +5,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:DeadLockApp"
     TabBarBackgroundColor="#453f34"
+    TabBarUnselectedColor="#ada58c"
+    TabBarDisabledColor="#ada58c"
+    TabBarTitleColor="#efdfc0"
     >
     <TabBar>
         <Tab Title="Главная" Icon="home_icon.png">
