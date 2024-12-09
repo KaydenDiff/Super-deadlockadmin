@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8" ?>
 <Shell
     x:Class="DeadLockApp.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
@@ -7,8 +6,10 @@
     TabBarBackgroundColor="#453f34"
     TabBarUnselectedColor="#ada58c"
     TabBarDisabledColor="#ada58c"
-    TabBarTitleColor="#efdfc0"
-    >
+    TabBarTitleColor="#efdfc0">
+
+    <!-- Страница для логина -->
+   
     <TabBar>
         <Tab Title="Главная" Icon="home_icon.png">
             <ShellContent ContentTemplate="{DataTemplate local:MainPage}" />
@@ -21,6 +22,5 @@
         <Tab Title="Предметы" Icon="items.png">
             <ShellContent ContentTemplate="{DataTemplate local:Items}" />
         </Tab>
-
     </TabBar>
 </Shell>
