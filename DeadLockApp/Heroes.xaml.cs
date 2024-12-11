@@ -11,6 +11,13 @@ public partial class Heroes : ContentPage
 		InitializeComponent();
         BindingContext = new MainViewModel();
     }
+    private async void OnCharacterSelected(object sender, SelectionChangedEventArgs e)
+    {
+        if (e.CurrentSelection.FirstOrDefault() is Character selectedCharacter)
+        {
+            await Shell.Current.GoToAsync($"builds?characterId={selectedCharacter.Id}");
+        }
+    }
 
-   
+
 }
