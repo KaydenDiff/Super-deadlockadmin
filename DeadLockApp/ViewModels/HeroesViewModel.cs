@@ -13,58 +13,68 @@ namespace DeadLockApp.ViewModels
     {
         private const string CharactersApiUrl = "http://course-project-4/api/characters";
 
-        private readonly HttpClient _httpClient = new HttpClient();
+        private readonly HttpClient _httpClient = new HttpClient(); // Инициализация HTTP клиента
 
-        public ObservableCollection<Character> Characters { get; set; } = new ObservableCollection<Character>();
-        public Character SelectedCharacter { get; set; }
+        public ObservableCollection<Character> Characters { get; set; } = new ObservableCollection<Character>(); // Коллекция персонажей для привязки
+        public Character SelectedCharacter { get; set; } // Выбранный персонаж
         public HeroesViewModel()
         {
-            _ = LoadCharactersAsync();
+            _ = LoadCharactersAsync(); // Загружаем персонажей асинхронно при инициализации ViewModel
         }
 
+        // Асинхронный метод для получения списка персонажей из API
         private async Task<List<Character>> FetchCharactersAsync(CancellationToken cancellationToken = default)
         {
             try
             {
-                var response = await _httpClient.GetStringAsync(CharactersApiUrl, cancellationToken);
-                var data = JsonSerializer.Deserialize<ApiResponse>(response);
-                return data?.Персонажи ?? new List<Character>();
+                var response = await _httpClient.GetStringAsync(CharactersApiUrl, cancellationToken); // Получаем строку ответа от API
+                var data = JsonSerializer.Deserialize<ApiResponse>(response); // Десериализуем ответ
+                return data?.Персонажи ?? new List<Character>(); // Возвращаем список персонажей, если он есть, или пустой список
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"Error fetching characters: {ex.Message}");
-                return new List<Character>();
+                Debug.WriteLine($"Error fetching characters: {ex.Message}"); // Логирование ошибки при получении данных
+                return new List<Character>(); // Возвращаем пустой список в случае ошибки
             }
         }
 
+        // Асинхронный метод для загрузки и обработки персонажей
         private async Task LoadCharactersAsync()
         {
             try
             {
-                var characters = await FetchCharactersAsync();
+                var characters = await FetchCharactersAsync(); // Загружаем персонажей
 
-                if (characters != null && characters.Any())
+                if (characters != null && characters.Any()) // Проверка на успешную загрузку персонажей
                 {
-                    Characters.Clear();
+                    Characters.Clear(); // Очищаем текущий список персонажей
                     foreach (var character in characters)
                     {
-                        character.Image = $"http://course-project-4/storage/{character.Image}";
-                        Characters.Add(character);
-                        Debug.WriteLine($"Loaded: {character.Image}");
+                        character.Image = $"http://course-project-4/storage/{character.Image}"; // Формируем полный путь для изображения
+                        Characters.Add(character); // Добавляем персонажа в коллекцию
+                        Debug.WriteLine($"Loaded: {character.Image}"); // Логирование загруженного персонажа
                     }
                 }
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"Error loading characters: {ex.Message}");
+                Debug.WriteLine($"Error loading characters: {ex.Message}"); // Логирование ошибки при загрузке персонажей
             }
         }
 
+        // Метод для сброса выбранного персонажа
+        public void ResetSelectedCharacter()
+        {
+            SelectedCharacter = null; // Сбрасываем выбор персонажа
+        }
+
+        // Событие изменения свойства для привязки данных
         public event PropertyChangedEventHandler PropertyChanged;
 
+        // Метод для уведомления об изменении свойства
         protected void OnPropertyChanged(string propertyName)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName)); // Вызываем событие изменения свойства
         }
     }
 }

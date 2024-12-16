@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:DeadLockApp.ViewModels"
              x:Class="DeadLockApp.BuildsPage"
              BackgroundColor="#2b2923">
 
+    <ContentPage.BindingContext>
+        <vm:BuildsViewModel />
+    </ContentPage.BindingContext>
+
     <VerticalStackLayout Padding="10">
         <!-- Заголовок -->
-        <Label x:Name="Pagetitle" 
+        <Label x:Name="PageTitle"
                Style="{StaticResource HeaderStyle}"
                HorizontalOptions="Center" />
 
@@ -21,24 +26,23 @@
 
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Frame Padding="10" Margin="5" BorderColor="#ada58c" CornerRadius="5" BackgroundColor="#3c3b37">
-                        <VerticalStackLayout>
-                            <!-- Название билда -->
+                    <Frame Margin="5" BorderColor="#ada58c" Background="#39473d">
+                        <HorizontalStackLayout Margin="5">
                             <Label Text="{Binding Name}"
                            FontSize="18"
-                           FontAttributes="Bold"
-                           TextColor="#efdfc0" />
-
-                            <!-- Имя автора -->
-                            <Label Text="{Binding Author}"
+                           TextColor="#efdfc0"
+                           VerticalOptions="Center" />
+                            <Label Text="{Binding Author, StringFormat='Автор: {0}'}"
                            FontSize="14"
-                           TextColor="#b8a888"
-                           Margin="0,5,0,0" />
-                        </VerticalStackLayout>
+                           TextColor="#ada58c"
+                           VerticalOptions="Center"
+                           Margin="10,0,0,0" />
+                        </HorizontalStackLayout>
                     </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+
 
 
         <!-- Кнопка для создания нового билда -->

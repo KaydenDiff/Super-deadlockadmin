@@ -8,13 +8,13 @@
             <Label Text="Герои Deadlock" 
                    Style="{StaticResource HeaderStyle}" 
                    HorizontalOptions="Center" />
-            <CollectionView ItemsSource="{Binding Characters}" 
-                            WidthRequest="394" 
-                            HorizontalOptions="Center" 
-                            Margin="8,0,0,0"
-                            SelectionMode="Single"
-                            SelectedItem="{Binding SelectedCharacter, Mode=TwoWay}"
-                            SelectionChanged="OnCharacterSelected">
+            <CollectionView x:Name="charactersCollectionView"
+                ItemsSource="{Binding Characters}"
+                SelectionChanged="OnCharacterSelected"
+                SelectionMode="Single"
+                WidthRequest="394" 
+                HorizontalOptions="Center" 
+                Margin="8,0,0,0">
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout Orientation="Vertical" Span="2" />
                 </CollectionView.ItemsLayout>
@@ -22,11 +22,14 @@
                     <DataTemplate>
                         <Border Padding="5">
                             <Image Source="{Binding Image}" 
-                                   Style="{StaticResource Img}" />
+                       Style="{StaticResource Img}" />
                         </Border>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+
+
+
         </StackLayout>
     </ScrollView>
 </ContentPage>
