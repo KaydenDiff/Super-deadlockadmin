@@ -26,8 +26,8 @@
 
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Frame Margin="5" BorderColor="#ada58c" Background="#39473d">
-                        <HorizontalStackLayout Margin="5">
+                    <Frame Margin="5" BorderColor="#ada58c" Background="#3d403a">
+                        <HorizontalStackLayout>
                             <Label Text="{Binding Name}"
                            FontSize="18"
                            TextColor="#efdfc0"
@@ -43,14 +43,14 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
 
-
-
         <!-- Кнопка для создания нового билда -->
-        <Button Text="Создать новый билд"
-                Command="{Binding CreateBuildCommand}"
-                BackgroundColor="#453f34"
-                TextColor="#efdfc0"
-                CornerRadius="5"
-                Margin="0,20,0,0" />
+        <Button x:Name="CreateBuildButton"
+        Text="Создать новый билд"
+        Command="{Binding CreateBuildCommand}"
+        BackgroundColor="#453f34"
+        TextColor="#efdfc0"
+        CornerRadius="5"
+        Margin="0,20,0,0"/>
+
     </VerticalStackLayout>
 </ContentPage>
