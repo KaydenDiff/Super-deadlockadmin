@@ -7,7 +7,7 @@ using System.Diagnostics;
 using System.Text.Json.Serialization;
 namespace DeadLockApp.ViewModels
 {
-    public class LoginViewModel : MainViewModel
+    public class LoginViewModel : ItemsViewModel
     {
         private string _username;
         public string Username

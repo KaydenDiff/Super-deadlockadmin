@@ -1,19 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace DeadLockApp.Models
 {
     public class Build
     {
-        public long Id { get; set; }
+        [JsonPropertyName("id")]
+        public int Id { get; set; }
+
+        [JsonPropertyName("name")]
         public string Name { get; set; }
-        public long CharacterId { get; set; }
-        public long? UserId { get; set; }
-        public DateTime? CreatedAt { get; set; }
-        public DateTime? UpdatedAt { get; set; }
+
+        [JsonPropertyName("author")]
+        public string Author { get; set; }
     }
 
+    public class BuildResponse
+    {
+        [JsonPropertyName("character")]
+        public Character Character { get; set; }
+
+        [JsonPropertyName("builds")]
+        public List<Build> Builds { get; set; }
+    }
 }

@@ -6,7 +6,7 @@ namespace DeadLockApp
         public MainPage()
         {
             InitializeComponent();
-            BindingContext = new MainViewModel();
+            BindingContext = new ItemsViewModel();
 
         }
     }

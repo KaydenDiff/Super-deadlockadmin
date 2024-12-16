@@ -23,4 +23,5 @@
             <ShellContent ContentTemplate="{DataTemplate local:Items}" />
         </Tab>
     </TabBar>
+
 </Shell>

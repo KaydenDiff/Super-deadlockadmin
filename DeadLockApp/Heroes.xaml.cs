@@ -1,23 +1,28 @@
-using DeadLockApp.ViewModels;
 using DeadLockApp.Models;
-using System;
+using DeadLockApp.ViewModels;
 using Microsoft.Maui.Controls;
-namespace DeadLockApp;
+using System;
 
-public partial class Heroes : ContentPage
+namespace DeadLockApp
 {
-	public Heroes()
-	{
-		InitializeComponent();
-        BindingContext = new MainViewModel();
-    }
-    private async void OnCharacterSelected(object sender, SelectionChangedEventArgs e)
+    public partial class Heroes : ContentPage
     {
-        if (e.CurrentSelection.FirstOrDefault() is Character selectedCharacter)
+        private HeroesViewModel ViewModel => BindingContext as HeroesViewModel;
+
+        public Heroes()
         {
-            await Shell.Current.GoToAsync($"builds?characterId={selectedCharacter.Id}");
+            InitializeComponent();
+            BindingContext = new HeroesViewModel();
+        }
+
+        private async void OnCharacterSelected(object sender, SelectionChangedEventArgs e)
+        {
+            var selectedCharacter = e.CurrentSelection.FirstOrDefault() as Character;
+            if (selectedCharacter != null)
+            {
+                // Переходим на страницу с билдами и передаем ID выбранного персонажа
+                await Navigation.PushAsync(new BuildsPage(selectedCharacter.Id));
+            }
         }
     }
-
-
 }

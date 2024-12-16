@@ -5,7 +5,7 @@
              x:Class="DeadLockApp.Items"
              BackgroundColor="#2b2923">
     <ContentPage.BindingContext>
-        <vm:MainViewModel />
+        <vm:ItemsViewModel />
     </ContentPage.BindingContext>
     <ScrollView>
         

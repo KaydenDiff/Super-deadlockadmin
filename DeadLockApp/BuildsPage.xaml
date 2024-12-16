@@ -2,37 +2,44 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DeadLockApp.BuildsPage"
-             Title="Билды"
              BackgroundColor="#2b2923">
 
     <VerticalStackLayout Padding="10">
         <!-- Заголовок -->
-        <Label Text="Билды персонажа" 
+        <Label x:Name="Pagetitle" 
                Style="{StaticResource HeaderStyle}"
                HorizontalOptions="Center" />
 
         <!-- Список билдов -->
         <CollectionView ItemsSource="{Binding Builds}"
-                        SelectionMode="Single"
-                        SelectedItem="{Binding SelectedBuild}"
-                        Margin="0,10,0,0">
+                SelectionMode="Single"
+                SelectedItem="{Binding SelectedBuild}"
+                Margin="0,10,0,0">
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout Orientation="Vertical" />
             </CollectionView.ItemsLayout>
 
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Frame Padding="10" Margin="5" BorderColor="#ada58c">
-                        <HorizontalStackLayout>
+                    <Frame Padding="10" Margin="5" BorderColor="#ada58c" CornerRadius="5" BackgroundColor="#3c3b37">
+                        <VerticalStackLayout>
+                            <!-- Название билда -->
                             <Label Text="{Binding Name}"
-                                   FontSize="18"
-                                   TextColor="#efdfc0"
-                                   VerticalOptions="Center" />
-                        </HorizontalStackLayout>
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           TextColor="#efdfc0" />
+
+                            <!-- Имя автора -->
+                            <Label Text="{Binding Author}"
+                           FontSize="14"
+                           TextColor="#b8a888"
+                           Margin="0,5,0,0" />
+                        </VerticalStackLayout>
                     </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+
 
         <!-- Кнопка для создания нового билда -->
         <Button Text="Создать новый билд"

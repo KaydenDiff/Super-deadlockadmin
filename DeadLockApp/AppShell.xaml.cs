@@ -8,7 +8,7 @@
             Routing.RegisterRoute("LoginPage", typeof(LoginPage));
             Routing.RegisterRoute("MainPage", typeof(MainPage));
             Routing.RegisterRoute("builds", typeof(BuildsPage));
-
+            Routing.RegisterRoute(nameof(BuildsPage), typeof(BuildsPage));
         }
     }
 }
