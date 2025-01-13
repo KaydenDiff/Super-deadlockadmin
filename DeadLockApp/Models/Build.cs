@@ -3,6 +3,18 @@ using System.Text.Json.Serialization;
 
 namespace DeadLockApp.Models
 {
+    public class BuildItem
+    {
+        [JsonPropertyName("part")]
+        public int PartId { get; set; }
+
+        [JsonPropertyName("item_id")]
+        public int ItemId { get; set; }
+
+        [JsonPropertyName("item_name")]
+        public string ItemName { get; set; }
+    }
+
     public class Build
     {
         [JsonPropertyName("id")]
@@ -13,6 +25,9 @@ namespace DeadLockApp.Models
 
         [JsonPropertyName("author")]
         public string Author { get; set; }
+
+        [JsonPropertyName("items")]
+        public List<BuildItem> Items { get; set; } = new();
     }
 
     public class BuildResponse
@@ -23,4 +38,11 @@ namespace DeadLockApp.Models
         [JsonPropertyName("builds")]
         public List<Build> Builds { get; set; }
     }
+    public class BuildDetailsResponse
+    {
+        public string Name { get; set; }
+        public int Id { get; set; }
+        public List<BuildItem> Items { get; set; }
+    }
+
 }

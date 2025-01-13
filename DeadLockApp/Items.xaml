@@ -56,7 +56,7 @@
             <ScrollView>
                 <VerticalStackLayout HorizontalOptions="Center">
                     <!-- Группа I -->
-                    <Label Text="I" FontSize="24" TextColor="#227864" Margin="0,10,0,5"  HorizontalOptions="Center"/>
+                    <Label Text="I" FontSize="24" TextColor="#35b093" Margin="0,10,0,5"  HorizontalOptions="Center"/>
                     <FlexLayout Wrap="Wrap" JustifyContent="Start" AlignItems="Start" Direction="Row" Margin="8,0,0,0">
                         <BindableLayout.ItemsSource>
                             <x:Binding Path="TierOneItems" />

@@ -27,6 +27,17 @@ namespace DeadLockApp
             // Принудительная загрузка данных каждый раз при появлении
             Task.Run(async () => await _viewModel.LoadBuildsAsync(CharacterId));
         }
+        private async void OnBuildSelected(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.CurrentSelection.FirstOrDefault() is Build selectedBuild)
+            {
+                // Сформируйте строковый маршрут с параметрами
+                string route = $"{nameof(BuildDetailsPage)}?buildId={selectedBuild.Id}&buildName={selectedBuild.Name}";
+                await Shell.Current.GoToAsync(route);
+            }
+        }
+
+
     }
 
 

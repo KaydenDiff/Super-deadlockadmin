@@ -1,4 +1,6 @@
-﻿namespace DeadLockApp
+﻿using Microsoft.Maui.Controls;
+
+namespace DeadLockApp
 {
     public partial class AppShell : Shell
     {
@@ -8,6 +10,7 @@
             Routing.RegisterRoute("LoginPage", typeof(LoginPage));
             Routing.RegisterRoute("MainPage", typeof(MainPage));
             Routing.RegisterRoute("builds", typeof(BuildsPage));
+            Routing.RegisterRoute(nameof(BuildDetailsPage), typeof(BuildDetailsPage));
             Routing.RegisterRoute(nameof(BuildsPage), typeof(BuildsPage));
         }
     }

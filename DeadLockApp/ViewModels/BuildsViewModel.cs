@@ -9,7 +9,7 @@ using DeadLockApp.Models;
 
 namespace DeadLockApp.ViewModels
 {
-    public class BuildsViewModel : INotifyPropertyChanged
+    public class BuildsViewModel : BaseViewModel
     {
         private const string ApiUrl = "http://course-project-4/api/character/{0}/builds"; // URL для API, который предоставляет информацию о билдах
 
