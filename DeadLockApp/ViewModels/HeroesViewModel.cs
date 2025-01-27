@@ -1,10 +1,12 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Net;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using DeadLockApp.Models;
 
 namespace DeadLockApp.ViewModels
@@ -20,6 +22,7 @@ namespace DeadLockApp.ViewModels
         public HeroesViewModel()
         {
             _ = LoadCharactersAsync(); // Загружаем персонажей асинхронно при инициализации ViewModel
+            EditCharacterCommand = new Command<Character>(OnEditCharacter);
         }
 
         // Асинхронный метод для получения списка персонажей из API
@@ -75,6 +78,72 @@ namespace DeadLockApp.ViewModels
         protected void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName)); // Вызываем событие изменения свойства
+        }
+        public async Task CreateCharacterAsync(string name, string imagePath = null)
+        {
+            try
+            {
+                var characterData = new MultipartFormDataContent();
+
+                // Добавляем имя персонажа в тело запроса
+                characterData.Add(new StringContent(name), "name");
+
+                // Если изображение передается, добавляем его в запрос
+                if (!string.IsNullOrEmpty(imagePath) && File.Exists(imagePath))
+                {
+                    var imageContent = new StreamContent(File.OpenRead(imagePath));
+                    imageContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("image/jpeg"); // Замените на правильный MIME-тип изображения
+
+                    characterData.Add(imageContent, "image", Path.GetFileName(imagePath)); // "image" — это имя поля на сервере
+                }
+
+                // Отправка POST-запроса на создание персонажа
+                var response = await _httpClient.PostAsync(CharactersApiUrl, characterData);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseData = await response.Content.ReadAsStringAsync();
+                    var createdCharacter = JsonSerializer.Deserialize<Character>(responseData);
+
+                    Characters.Add(createdCharacter); // Добавление нового персонажа в коллекцию
+                    Debug.WriteLine("Character created successfully");
+                }
+                else
+                {
+                    // Если ошибка не успешна, получаем ответ от сервера
+                    var errorResponse = await response.Content.ReadAsStringAsync();
+                    Debug.WriteLine($"Error creating character: {errorResponse}");
+
+                    // Можно добавить обработку ошибки по статусу, например:
+                    if (response.StatusCode == HttpStatusCode.Forbidden)
+                    {
+                        // Сообщение о недостаточных правах
+                        Debug.WriteLine("Недостаточно прав для создания персонажа.");
+                    }
+                    else
+                    {
+                        // Обработка других ошибок
+                        Debug.WriteLine($"Ошибка: {errorResponse}");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error creating character: {ex.Message}"); // Логирование ошибки
+            }
+
+        }
+        public ICommand EditCharacterCommand { get; }
+
+
+
+        private async void OnEditCharacter(Character character)
+        {
+            if (character == null)
+                return;
+
+            // Используем абсолютный маршрут с /// и кодируем параметры
+            await Shell.Current.GoToAsync($"EditCharacterPage?characterId={character.Id}&name={Uri.EscapeDataString(character.Name)}&image={Uri.EscapeDataString(character.Image)}");
         }
     }
 }

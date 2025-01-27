@@ -22,6 +22,9 @@
         <Tab Title="Предметы" Icon="items.png">
             <ShellContent ContentTemplate="{DataTemplate local:Items}" />
         </Tab>
+        <Tab Title="Авторизация" Icon="items.png">
+            <ShellContent ContentTemplate="{DataTemplate local:LoginPage}" />
+        </Tab>
     </TabBar>
-
-</Shell>
+    
+   </Shell>

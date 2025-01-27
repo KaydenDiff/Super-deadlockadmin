@@ -14,6 +14,7 @@ namespace DeadLockApp
         public Heroes()
         {
             InitializeComponent(); // Инициализируем компоненты страницы
+            Shell.SetNavBarIsVisible(this, false);
             BindingContext = new HeroesViewModel(); // Привязываем ViewModel к странице
         }
 
@@ -63,6 +64,11 @@ namespace DeadLockApp
                 charactersCollectionView.SelectedItem = null; // Сбрасываем выделение текущего элемента
                 charactersCollectionView.ItemsSource = null; // Очищаем источник данных
             }
+        }
+        private async void OnCreateCharacterButtonClicked(object sender, EventArgs e)
+        {
+            // Переход на страницу создания персонажа
+            await Shell.Current.GoToAsync("///createCharacterPage");
         }
     }
 }

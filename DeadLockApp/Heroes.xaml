@@ -8,6 +8,12 @@
             <Label Text="Герои Deadlock" 
                    Style="{StaticResource HeaderStyle}" 
                    HorizontalOptions="Center" />
+            <Button Text="Создать Персонажа" 
+      BackgroundColor="#453f34"
+      TextColor="#efdfc0"
+      CornerRadius="5"
+      HorizontalOptions="Center" 
+      Clicked="OnCreateCharacterButtonClicked" />
             <CollectionView x:Name="charactersCollectionView"
                 ItemsSource="{Binding Characters}"
                 SelectionChanged="OnCharacterSelected"
@@ -20,16 +26,22 @@
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Border Padding="5">
+                        <StackLayout Padding="5">
+                            <!-- Изображение персонажа -->
                             <Image Source="{Binding Image}" 
-                       Style="{StaticResource Img}" />
-                        </Border>
+                                   Style="{StaticResource Img}" />
+                            <!-- Кнопка "Изменить персонажа" -->
+                            <Button Text="Изменить" 
+                                    BackgroundColor="#453f34"
+                                    TextColor="#efdfc0"
+                                    CornerRadius="5"
+                                    HorizontalOptions="FillAndExpand"
+                                    Command="{Binding BindingContext.EditCharacterCommand, Source={x:Reference charactersCollectionView}}"
+                                    CommandParameter="{Binding}" />
+                        </StackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-
-
-
         </StackLayout>
     </ScrollView>
 </ContentPage>

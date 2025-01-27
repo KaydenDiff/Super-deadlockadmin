@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:local="clr-namespace:DeadLockApp"
+             x:Class="DeadLockApp.EditCharacterPage">
+    <StackLayout Padding="20">
+        <Label Text="Редактирование персонажа"
+               Style="{StaticResource HeaderStyle}"
+               HorizontalOptions="Center" />
+        <!-- Поле ввода имени -->
+        <Entry x:Name="NameEntry"
+               Placeholder="Введите имя персонажа"
+               TextColor="#efdfc0"
+               BackgroundColor="#453f34"
+               PlaceholderColor="#999999" />
+        <!-- Поле выбора изображения -->
+        <Button Text="Выбрать изображение"
+                BackgroundColor="#453f34"
+                TextColor="#efdfc0"
+                Clicked="OnSelectImageClicked" />
+        <Image x:Name="CharacterImage"
+               HeightRequest="200"
+               Margin="0,10,0,10" />
+        <!-- Кнопка сохранения -->
+        <Button Text="Сохранить"
+                BackgroundColor="#4CAF50"
+                TextColor="#ffffff"
+               Clicked="OnSaveButtonClicked"/> 
+    </StackLayout>
+</ContentPage>
