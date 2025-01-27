@@ -18,6 +18,7 @@ namespace DeadLockApp.ViewModels
         public ObservableCollection<Item> SituationsItems { get; set; } = new ObservableCollection<Item>();
 
         private string _buildName;
+        private string _buildAuthor;
         public string BuildName
         {
             get => _buildName;
@@ -25,6 +26,15 @@ namespace DeadLockApp.ViewModels
             {
                 _buildName = value;
                 OnPropertyChanged(nameof(BuildName));
+            }
+        }
+        public string BuildAuthor
+        {
+            get => _buildAuthor;
+            set
+            {
+                _buildAuthor = value;
+                OnPropertyChanged(nameof(BuildAuthor));
             }
         }
 
@@ -52,6 +62,7 @@ namespace DeadLockApp.ViewModels
                         Debug.WriteLine($"Selected Build Name: {build.Name}");
 
                         BuildName = build.Name;
+                        BuildAuthor = build.Author;
 
                         StartItems.Clear();
                         MiddleItems.Clear();
