@@ -81,6 +81,9 @@ namespace DeadLockApp
                     return;
                 }
 
+                // Логируем перед отправкой запроса
+                Console.WriteLine($"Перед отправкой данные:\nИмя: {Name}\nПуть к изображению: {_imagePath}");
+
                 var updatedCharacter = new Character
                 {
                     Id = CharacterId,
@@ -88,6 +91,7 @@ namespace DeadLockApp
                 };
 
                 var content = new MultipartFormDataContent();
+                // Убедись, что отправляется правильное значение
                 content.Add(new StringContent(updatedCharacter.Name), "name");
 
                 if (!string.IsNullOrEmpty(_imagePath))
@@ -104,8 +108,14 @@ namespace DeadLockApp
 
                 if (response.IsSuccessStatusCode)
                 {
+                    // Логируем отправленные данные для отладки
+                    await DisplayAlert("DEBUG",
+                        $"Отправленные данные:\nИмя: {Name}\nИзображение: {_imagePath}",
+                        "ОК");
+
                     await DisplayAlert("Успех", "Персонаж успешно обновлён.", "ОК");
                     await Shell.Current.GoToAsync("Heroes");
+
                     var responseContent = await response.Content.ReadAsStringAsync();
                     Console.WriteLine($"Ответ от сервера: {responseContent}");
                 }

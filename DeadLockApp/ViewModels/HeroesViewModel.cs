@@ -174,7 +174,7 @@ namespace DeadLockApp.ViewModels
                     httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
                 var response = await httpClient.DeleteAsync($"http://course-project-4/api/characters/{character.Id}");
-
+              
                 if (!response.IsSuccessStatusCode)
                 {
                     await Application.Current.MainPage.DisplayAlert("Ошибка", "Не удалось удалить персонажа.", "ОК");

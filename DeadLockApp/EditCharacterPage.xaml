@@ -9,10 +9,11 @@
                HorizontalOptions="Center" />
         <!-- Поле ввода имени -->
         <Entry x:Name="NameEntry"
-               Placeholder="Введите имя персонажа"
-               TextColor="#efdfc0"
-               BackgroundColor="#453f34"
-               PlaceholderColor="#999999" />
+       Placeholder="Введите имя персонажа"
+       TextColor="#efdfc0"
+       BackgroundColor="#453f34"
+       PlaceholderColor="#999999"
+       Text="{Binding Name}" />
         <!-- Поле выбора изображения -->
         <Button Text="Выбрать изображение"
                 BackgroundColor="#453f34"

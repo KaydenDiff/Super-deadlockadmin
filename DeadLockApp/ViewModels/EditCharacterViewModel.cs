@@ -100,6 +100,10 @@ namespace DeadLockApp.ViewModels
 
         private async Task EditCharacterAsync()
         {
+            // Логируем вызов метода
+            await Application.Current.MainPage.DisplayAlert("DEBUG", "Метод EditCharacterAsync вызван", "ОК");
+
+            // Проверяем, что все необходимые поля заполнены
             if (CharacterId <= 0 || string.IsNullOrWhiteSpace(Name))
             {
                 await Application.Current.MainPage.DisplayAlert("Ошибка", "Все поля должны быть заполнены.", "ОК");
@@ -108,7 +112,7 @@ namespace DeadLockApp.ViewModels
 
             try
             {
-                // Получаем токен из SecureStorage
+                // Получаем токен из безопасного хранилища
                 var token = await SecureStorage.GetAsync("auth_token");
                 if (string.IsNullOrEmpty(token))
                 {
@@ -116,42 +120,71 @@ namespace DeadLockApp.ViewModels
                     return;
                 }
 
+                // Создаем MultipartFormDataContent для отправки данных
                 var formData = new MultipartFormDataContent();
 
-                // Если изображение - это файл, то добавляем его в форму
+                // Логируем имя перед отправкой
+                await Application.Current.MainPage.DisplayAlert("DEBUG", $"Отправляем имя: {Name}", "ОК");
+
+                // Добавляем имя в запрос
+                var nameContent = new StringContent(Name, Encoding.UTF8);
+                nameContent.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("form-data")
+                {
+                    Name = "name"
+                };
+                formData.Add(nameContent);
+
+                // Если есть изображение, добавляем его
                 if (!string.IsNullOrEmpty(ImagePath) && File.Exists(ImagePath))
                 {
-                    var fileStream = new FileStream(ImagePath, FileMode.Open);
+                    var fileStream = new FileStream(ImagePath, FileMode.Open, FileAccess.Read);
                     var fileContent = new StreamContent(fileStream);
                     fileContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("image/jpeg");
                     formData.Add(fileContent, "image", Path.GetFileName(ImagePath));
+
+                    // Логируем путь к изображению перед отправкой
+                    await Application.Current.MainPage.DisplayAlert("DEBUG", $"Отправляем изображение: {ImagePath}", "ОК");
                 }
 
-                // Добавляем остальные данные персонажа в форму
-                formData.Add(new StringContent(Name), "name");
-
-                // Добавляем заголовок Authorization с токеном
+                // Добавляем заголовок авторизации
                 _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
+                // Отправляем запрос на сервер
                 var response = await _httpClient.PostAsync($"{ApiUrl}/{CharacterId}", formData);
+                var responseContent = await response.Content.ReadAsStringAsync();
+
+                // Логируем код ответа и содержимое ответа
+                await Application.Current.MainPage.DisplayAlert("DEBUG", $"Код ответа: {response.StatusCode}", "ОК");
+                await Application.Current.MainPage.DisplayAlert("Ответ сервера", string.IsNullOrWhiteSpace(responseContent) ? "Пустой ответ" : responseContent, "ОК");
+
+                // Проверяем успешность ответа
                 if (response.IsSuccessStatusCode)
                 {
-                    await Application.Current.MainPage.DisplayAlert("Успех", "Персонаж успешно обновлен!", "ОК");
+                    // Логируем, что отправлялось в запросе
+                    await Application.Current.MainPage.DisplayAlert("DEBUG",
+                        $"Отправленные данные:\nИмя: {Name}\nИзображение: {ImagePath}",
+                        "ОК");
+
+                    // Если обновление прошло успешно, показываем сообщение об успехе
+                    await Application.Current.MainPage.DisplayAlert("Успех", $"Отправленные данные:\nИмя: {Name}\nИзображение: {ImagePath}",
+                        "ОК");
+
+                    // Переходим назад на предыдущую страницу
                     await Shell.Current.GoToAsync("..");
                 }
                 else
                 {
-                    var errorMessage = await response.Content.ReadAsStringAsync();
-                    if (errorMessage != null)
-                    {
-                        await Application.Current.MainPage.DisplayAlert("Ошибка", $"Не удалось обновить персонажа. {errorMessage}", "ОК");
-                    }
+                    // Если ошибка, показываем сообщение с ошибкой
+                    await Application.Current.MainPage.DisplayAlert("Ошибка", $"Ошибка обновления персонажа: {response.StatusCode}", "ОК");
                 }
             }
             catch (Exception ex)
             {
-                await Application.Current.MainPage.DisplayAlert("Ошибка", $"Произошла ошибка: {ex.Message}", "ОК");
+                // Ловим исключения и выводим сообщение об ошибке
+                await Application.Current.MainPage.DisplayAlert("Ошибка", $"Исключение: {ex.Message}", "ОК");
             }
         }
+
+
     }
 }
