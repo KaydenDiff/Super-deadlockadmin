@@ -40,7 +40,25 @@ namespace DeadLockApp
             }
         }
 
-        private async Task OnSaveButtonClicked(object sender, EventArgs e)
+       
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            LoadCharacterData(CharacterId, Name, Image);
+        }
+
+        // Новый метод для сохранения данных при уходе со страницы
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+      
+        }
+
+        private void OnSaveButtonClicked(object sender, EventArgs e)
+        {
+            _ = SaveCharacterAsync(); // Вызываем асинхронный метод без ожидания результата
+        }
+        private async Task SaveCharacterAsync()
         {
             if (string.IsNullOrWhiteSpace(Name))
             {
@@ -88,6 +106,8 @@ namespace DeadLockApp
                 {
                     await DisplayAlert("Успех", "Персонаж успешно обновлён.", "ОК");
                     await Shell.Current.GoToAsync("Heroes");
+                    var responseContent = await response.Content.ReadAsStringAsync();
+                    Console.WriteLine($"Ответ от сервера: {responseContent}");
                 }
                 else
                 {
@@ -98,24 +118,6 @@ namespace DeadLockApp
             catch (Exception ex)
             {
                 await DisplayAlert("Ошибка", $"Произошла ошибка: {ex.Message}", "ОК");
-            }
-        }
-
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-            LoadCharacterData(CharacterId, Name, Image);
-        }
-
-        // Новый метод для сохранения данных при уходе со страницы
-        protected override async void OnDisappearing()
-        {
-            base.OnDisappearing();
-
-            // Проводим сохранение при попытке вернуться
-            if (!string.IsNullOrWhiteSpace(Name) || !string.IsNullOrEmpty(_imagePath))
-            {
-                await OnSaveButtonClicked(null, null);
             }
         }
         private void LoadCharacterData(int id, string name, string image)

@@ -9,18 +9,18 @@
                    Style="{StaticResource HeaderStyle}" 
                    HorizontalOptions="Center" />
             <Button Text="Создать Персонажа" 
-      BackgroundColor="#453f34"
-      TextColor="#efdfc0"
-      CornerRadius="5"
-      HorizontalOptions="Center" 
-      Clicked="OnCreateCharacterButtonClicked" />
+                    BackgroundColor="#453f34"
+                    TextColor="#efdfc0"
+                    CornerRadius="5"
+                    HorizontalOptions="Center" 
+                    Clicked="OnCreateCharacterButtonClicked" />
             <CollectionView x:Name="charactersCollectionView"
-                ItemsSource="{Binding Characters}"
-                SelectionChanged="OnCharacterSelected"
-                SelectionMode="Single"
-                WidthRequest="394" 
-                HorizontalOptions="Center" 
-                Margin="8,0,0,0">
+                            ItemsSource="{Binding Characters}"
+                            SelectionChanged="OnCharacterSelected"
+                            SelectionMode="Single"
+                            WidthRequest="394" 
+                            HorizontalOptions="Center" 
+                            Margin="8,0,0,0">
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout Orientation="Vertical" Span="2" />
                 </CollectionView.ItemsLayout>
@@ -30,14 +30,23 @@
                             <!-- Изображение персонажа -->
                             <Image Source="{Binding Image}" 
                                    Style="{StaticResource Img}" />
-                            <!-- Кнопка "Изменить персонажа" -->
-                            <Button Text="Изменить" 
-                                    BackgroundColor="#453f34"
-                                    TextColor="#efdfc0"
-                                    CornerRadius="5"
-                                    HorizontalOptions="FillAndExpand"
-                                    Command="{Binding BindingContext.EditCharacterCommand, Source={x:Reference charactersCollectionView}}"
-                                    CommandParameter="{Binding}" />
+                            <!-- Кнопки "Изменить персонажа" и "Удалить персонажа" -->
+                            <StackLayout Orientation="Horizontal" Spacing="10">
+                                <Button Text="Изменить" 
+                                        BackgroundColor="#453f34"
+                                        TextColor="#efdfc0"
+                                        CornerRadius="5"
+                                        HorizontalOptions="FillAndExpand"
+                                        Command="{Binding BindingContext.EditCharacterCommand, Source={x:Reference charactersCollectionView}}"
+                                        CommandParameter="{Binding}" />
+                                <Button Text="Удалить" 
+                                        BackgroundColor="#ff3b30"
+                                        TextColor="#ffffff"
+                                        CornerRadius="5"
+                                        HorizontalOptions="FillAndExpand"
+                                        Command="{Binding BindingContext.DeleteCharacterCommand, Source={x:Reference charactersCollectionView}}"
+                                        CommandParameter="{Binding}" />
+                            </StackLayout>
                         </StackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

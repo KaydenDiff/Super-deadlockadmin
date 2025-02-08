@@ -2,6 +2,7 @@ using DeadLockApp.Models;
 using DeadLockApp.ViewModels;
 using Microsoft.Maui.Controls;
 using System;
+using System.Net.Http.Headers;
 
 namespace DeadLockApp
 {
@@ -70,5 +71,7 @@ namespace DeadLockApp
             // Переход на страницу создания персонажа
             await Shell.Current.GoToAsync("///createCharacterPage");
         }
+        
     }
 }
+

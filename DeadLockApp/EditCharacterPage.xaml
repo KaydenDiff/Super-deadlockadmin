@@ -25,6 +25,6 @@
         <Button Text="Сохранить"
                 BackgroundColor="#4CAF50"
                 TextColor="#ffffff"
-               /> 
+                Clicked="OnSaveButtonClicked"/> 
     </StackLayout>
 </ContentPage>

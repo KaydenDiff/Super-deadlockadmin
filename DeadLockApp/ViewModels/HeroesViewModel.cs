@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -19,10 +20,12 @@ namespace DeadLockApp.ViewModels
 
         public ObservableCollection<Character> Characters { get; set; } = new ObservableCollection<Character>(); // Коллекция персонажей для привязки
         public Character SelectedCharacter { get; set; } // Выбранный персонаж
+        public ICommand DeleteCharacterCommand { get; }
         public HeroesViewModel()
         {
             _ = LoadCharactersAsync(); // Загружаем персонажей асинхронно при инициализации ViewModel
             EditCharacterCommand = new Command<Character>(OnEditCharacter);
+            DeleteCharacterCommand = new Command<Character>(DeleteCharacter);
         }
 
         // Асинхронный метод для получения списка персонажей из API
@@ -144,6 +147,43 @@ namespace DeadLockApp.ViewModels
 
             // Используем абсолютный маршрут с /// и кодируем параметры
             await Shell.Current.GoToAsync($"EditCharacterPage?characterId={character.Id}&name={Uri.EscapeDataString(character.Name)}&image={Uri.EscapeDataString(character.Image)}");
+        }
+        private async void DeleteCharacter(Character character)
+        {
+            if (character == null)
+                return;
+
+            bool confirm = await Application.Current.MainPage.DisplayAlert(
+                "Подтверждение",
+                $"Вы уверены, что хотите удалить {character.Name}?",
+                "Да", "Нет");
+
+            if (!confirm)
+                return;
+
+            // Удаление персонажа из коллекции
+            Characters.Remove(character);
+
+            // Если у вас API, добавьте удаление с сервера:
+            try
+            {
+                var httpClient = new HttpClient();
+                var token = await SecureStorage.GetAsync("auth_token");
+
+                if (!string.IsNullOrEmpty(token))
+                    httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+                var response = await httpClient.DeleteAsync($"http://course-project-4/api/characters/{character.Id}");
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    await Application.Current.MainPage.DisplayAlert("Ошибка", "Не удалось удалить персонажа.", "ОК");
+                }
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Ошибка", $"Ошибка: {ex.Message}", "ОК");
+            }
         }
     }
 }
