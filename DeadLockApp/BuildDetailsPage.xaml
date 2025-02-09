@@ -107,6 +107,11 @@
                     </DataTemplate>
                 </BindableLayout.ItemTemplate>
             </FlexLayout>
+            <Button Text="Удалить сборку"
+                    BackgroundColor="#d9534f"
+                    TextColor="White"
+                    Command="{Binding DeleteBuildCommand}"
+                    Margin="20, 10, 20, 10"/>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
