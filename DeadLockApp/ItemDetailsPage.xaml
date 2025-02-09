@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                      xmlns:vm="clr-namespace:DeadLockApp.ViewModels"
+             x:Class="DeadLockApp.ItemDetailsPage"
+                BackgroundColor="#2b2923">
+    <ContentPage.BindingContext>
+        <vm:ItemDetailsViewModel/>
+    </ContentPage.BindingContext>
+
+    <VerticalStackLayout Padding="20">
+        <!-- Показываем текущее изображение -->
+        <Image Source="{Binding FullImagePath}" WidthRequest="200" HeightRequest="200" Aspect="AspectFill"/>
+
+        <!-- Кнопка для выбора нового изображения -->
+        <Button Text="Выбрать изображение"
+                BackgroundColor="#453f34"
+                TextColor="#efdfc0"
+                CornerRadius="5"
+                HorizontalOptions="Center"
+                Command="{Binding SelectImageCommand}" />
+
+        <Entry Text="{Binding SelectedItem.Name}" FontSize="24" TextColor="White" Placeholder="Название предмета"  />
+        <Entry Text="{Binding SelectedItem.Description}" FontSize="16" TextColor="Gray" Placeholder="Описание предмета"/>
+
+        <HorizontalStackLayout>
+            <Image Source="souls.png" WidthRequest="20" HeightRequest="20"/>
+            <Entry Text="{Binding SelectedItem.Cost}" FontSize="18" TextColor="#47fdd3" Keyboard="Numeric" Placeholder="Стоимость"/>
+        </HorizontalStackLayout>
+
+        <StackLayout Orientation="Horizontal" Spacing="10">
+            <Button Text="Изменить предмет"
+                    BackgroundColor="#453f34"
+                    TextColor="#efdfc0"
+                    CornerRadius="5"
+                    HorizontalOptions="FillAndExpand"
+                    Command="{Binding EditItemCommand}"
+                    CommandParameter="{Binding SelectedItem}"/>
+            <Button Text="Удалить предмет" BackgroundColor="#ff3b30"
+                    TextColor="#ffffff"
+                    CornerRadius="5"
+                    HorizontalOptions="FillAndExpand"
+                    Command="{Binding DeleteItemCommand}"
+                    CommandParameter="{Binding SelectedItem}" />
+        </StackLayout>
+    </VerticalStackLayout>
+</ContentPage>

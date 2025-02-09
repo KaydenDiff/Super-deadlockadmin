@@ -86,6 +86,9 @@
 	  <MauiXaml Update="Heroes.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="ItemDetailsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Items.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

@@ -14,20 +14,28 @@ namespace DeadLockApp
     {
         [JsonPropertyName("id")]
         public int Id { get; set; }
+
         [JsonPropertyName("name")]
         public string Name { get; set; }
+
         [JsonPropertyName("description")]
         public string Description { get; set; }
+
         [JsonPropertyName("cost")]
         public int Cost { get; set; }
+
         [JsonPropertyName("tier_id")]
         public int Tier_id { get; set; }
+
         [JsonPropertyName("type_id")]
         public int Type_id { get; set; }
+
         [JsonPropertyName("image")]
         public string Image { get; set; }
+
         [JsonPropertyName("required_items")]
-        public object Required_items { get; set; } // Поле может быть любым типом
+        public object Required_items { get; set; }  // Оставляем как object для возможности null
+
         public string CreatedAt { get; set; }
         public string UpdatedAt { get; set; }
     }

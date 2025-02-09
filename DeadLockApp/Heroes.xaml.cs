@@ -69,7 +69,7 @@ namespace DeadLockApp
         private async void OnCreateCharacterButtonClicked(object sender, EventArgs e)
         {
             // Переход на страницу создания персонажа
-            await Shell.Current.GoToAsync("///createCharacterPage");
+            await Shell.Current.GoToAsync("createCharacterPage");
         }
         
     }

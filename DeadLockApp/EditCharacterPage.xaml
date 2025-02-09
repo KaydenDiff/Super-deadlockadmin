@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                 xmlns:local="clr-namespace:DeadLockApp"
-             x:Class="DeadLockApp.EditCharacterPage">
+             x:Class="DeadLockApp.EditCharacterPage"  BackgroundColor="#2b2923">
     <StackLayout Padding="20">
         <Label Text="Редактирование персонажа"
                Style="{StaticResource HeaderStyle}"

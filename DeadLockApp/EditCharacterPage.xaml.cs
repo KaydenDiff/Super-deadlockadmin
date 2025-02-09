@@ -108,10 +108,7 @@ namespace DeadLockApp
 
                 if (response.IsSuccessStatusCode)
                 {
-                    // Логируем отправленные данные для отладки
-                    await DisplayAlert("DEBUG",
-                        $"Отправленные данные:\nИмя: {Name}\nИзображение: {_imagePath}",
-                        "ОК");
+                   
 
                     await DisplayAlert("Успех", "Персонаж успешно обновлён.", "ОК");
                     await Shell.Current.GoToAsync("Heroes");

@@ -5,30 +5,24 @@ namespace DeadLockApp;
 
 public partial class UserPage : ContentPage
 {
+    public string UserName { get; set; }
+    public string RoleCode { get; set; }
+
     public UserPage()
     {
         InitializeComponent();
     }
 
-    // Свойства для привязки
-    public string Username { get; set; }
-    public string Role { get; set; }
-
-    protected override void OnAppearing()
+    protected override async void OnAppearing()
     {
         base.OnAppearing();
 
-        // Пример установки значений для привязки
-        BindingContext = this;  // Здесь используется текущий экземпляр страницы
-    }
+        // Загружаем данные из SecureStorage
+        UserName = await SecureStorage.GetAsync("username");
+        RoleCode = await SecureStorage.GetAsync("role_code");
 
-    public void SetUserInfo(string userName, string role)
-    {
-        Username = userName;
-        Role = role;
-
-        // Обновление привязки
-        OnPropertyChanged(nameof(Username));
-        OnPropertyChanged(nameof(Role));
+        // Обновляем UI с полученными данными
+        userNameLabel.Text = UserName; // Например, метка для имени пользователя
+        roleCodeLabel.Text = RoleCode; // Например, метка для кода роли
     }
 }
