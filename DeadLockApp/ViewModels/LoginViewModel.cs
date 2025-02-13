@@ -104,7 +104,7 @@ namespace DeadLockApp.ViewModels
             try
             {
                 using var httpClient = new HttpClient();
-                var url = "http://course-project-4/public/api/login";
+                var url = "http://192.168.0.105/public/api/login";
 
                 // Формируем тело запроса
                 var content = new StringContent(

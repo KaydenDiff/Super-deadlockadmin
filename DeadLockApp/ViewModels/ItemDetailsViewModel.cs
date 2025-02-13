@@ -52,7 +52,7 @@ namespace DeadLockApp.ViewModels
         // Свойство для пути изображения
         public string FullImagePath
         {
-            get => !string.IsNullOrEmpty(_fullImagePath) ? _fullImagePath : $"http://course-project-4/storage/{SelectedItem?.Image}";
+            get => !string.IsNullOrEmpty(_fullImagePath) ? _fullImagePath : $"http://192.168.0.105/storage/{SelectedItem?.Image}";
             set
             {
                 if (_fullImagePath != value)
@@ -121,7 +121,7 @@ namespace DeadLockApp.ViewModels
 
                 _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
-                var response = await _httpClient.PostAsync($"http://course-project-4/api/items/{SelectedItem.Id}", formData);
+                var response = await _httpClient.PostAsync($"http://192.168.0.105/api/items/{SelectedItem.Id}", formData);
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -158,7 +158,7 @@ namespace DeadLockApp.ViewModels
                 if (!string.IsNullOrEmpty(token))
                     _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
-                var response = await _httpClient.DeleteAsync($"http://course-project-4/api/items/{SelectedItem.Id}");
+                var response = await _httpClient.DeleteAsync($"http://192.168.0.105/api/items/{SelectedItem.Id}");
 
                 if (response.IsSuccessStatusCode)
                 {

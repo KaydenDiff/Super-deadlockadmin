@@ -11,7 +11,7 @@ namespace DeadLockApp.ViewModels
 {
     public class ItemsViewModel : BaseViewModel
     {
-        private const string ItemsApiUrl = "http://course-project-4/api/items"; // URL для API, который предоставляет данные о предметах
+        private const string ItemsApiUrl = "http://192.168.0.105/api/items"; // URL для API, который предоставляет данные о предметах
 
         // Коллекции для предметов разных категорий
         public ObservableCollection<Item> TierOneItems { get; set; } = new ObservableCollection<Item>();
@@ -130,7 +130,7 @@ namespace DeadLockApp.ViewModels
 
             foreach (var item in items)
             {
-                item.Image = $"http://course-project-4/public/storage/{item.Image}";
+                item.Image = $"http://192.168.0.105/public/storage/{item.Image}";
             }
 
             Items = items; // Заполняем список предметов

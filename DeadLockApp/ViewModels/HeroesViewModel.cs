@@ -14,7 +14,7 @@ namespace DeadLockApp.ViewModels
 {
     public class HeroesViewModel : BaseViewModel
     {
-        private const string CharactersApiUrl = "http://course-project-4/api/characters";
+        private const string CharactersApiUrl = "http://192.168.0.105/api/characters";
 
         private readonly HttpClient _httpClient = new HttpClient(); // Инициализация HTTP клиента
 
@@ -56,7 +56,7 @@ namespace DeadLockApp.ViewModels
                     Characters.Clear(); // Очищаем текущий список персонажей
                     foreach (var character in characters)
                     {
-                        character.Image = $"http://course-project-4/storage/{character.Image}"; // Формируем полный путь для изображения
+                        character.Image = $"http://192.168.0.105/storage/{character.Image}"; // Формируем полный путь для изображения
                         Characters.Add(character); // Добавляем персонажа в коллекцию
                         Debug.WriteLine($"Loaded: {character.Image}"); // Логирование загруженного персонажа
                     }
@@ -173,7 +173,7 @@ namespace DeadLockApp.ViewModels
                 if (!string.IsNullOrEmpty(token))
                     httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
-                var response = await httpClient.DeleteAsync($"http://course-project-4/api/characters/{character.Id}");
+                var response = await httpClient.DeleteAsync($"http://192.168.0.105/api/characters/{character.Id}");
               
                 if (!response.IsSuccessStatusCode)
                 {

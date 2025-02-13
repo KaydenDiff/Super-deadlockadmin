@@ -21,4 +21,9 @@ public partial class Items : ContentPage
         Debug.WriteLine("Страница Items появилась — обновляем данные...");
         await _viewModel.LoadItemsAsync(); // Загружаем предметы при каждом появлении страницы
     }
+    private async void OnCreateCharacterButtonClicked(object sender, EventArgs e)
+    {
+        // Переход на страницу создания персонажа
+        await Shell.Current.GoToAsync("createItemPage");
+    }
 }

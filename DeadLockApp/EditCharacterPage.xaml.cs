@@ -104,7 +104,7 @@ namespace DeadLockApp
                 var httpClient = new HttpClient();
                 httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
-                var response = await httpClient.PostAsync($"http://course-project-4/api/characters/{CharacterId}", content);
+                var response = await httpClient.PostAsync($"http://192.168.0.105/api/characters/{CharacterId}", content);
 
                 if (response.IsSuccessStatusCode)
                 {

@@ -18,7 +18,7 @@ namespace DeadLockApp.ViewModels
 {
     public class EditCharacterViewModel : BaseViewModel
     {
-        private const string ApiUrl = "http://course-project-4/api/characters"; // URL для редактирования персонажа
+        private const string ApiUrl = "http://192.168.0.105/api/characters"; // URL для редактирования персонажа
         private readonly HttpClient _httpClient;
 
         private int _characterId;

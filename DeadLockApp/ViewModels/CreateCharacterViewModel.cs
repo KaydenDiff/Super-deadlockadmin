@@ -9,7 +9,7 @@ using DeadLockApp.Models;
 
 public class CreateCharacterViewModel : BaseViewModel
 {
-    private const string ApiUrl = "http://course-project-4/api/characters/create";
+    private const string ApiUrl = "http://192.168.0.105/api/characters/create";
     private readonly HttpClient _httpClient;
 
     private string _name;

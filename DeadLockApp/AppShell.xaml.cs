@@ -6,6 +6,7 @@ namespace DeadLockApp
     {
         public AppShell()
         {
+            Shell.SetBackgroundColor(this, Color.FromArgb("#23221e")); 
             InitializeComponent();
             Routing.RegisterRoute("LoginPage", typeof(LoginPage));
             Routing.RegisterRoute("MainPage", typeof(MainPage));
@@ -17,6 +18,7 @@ namespace DeadLockApp
             Routing.RegisterRoute(nameof(BuildDetailsPage), typeof(BuildDetailsPage));
             Routing.RegisterRoute(nameof(BuildsPage), typeof(BuildsPage));
             Routing.RegisterRoute("createCharacterPage", typeof(CreateCharacterPage));
+            Routing.RegisterRoute("createItemPage", typeof(CreateItemPage));
             Routing.RegisterRoute("EditCharacterPage", typeof(EditCharacterPage));
         }
     }
